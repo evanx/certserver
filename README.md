@@ -32,6 +32,9 @@ sh scripts/test.sh
 
 When the app is running, you can view the URL <a href="https://localhost:8443/help">https://localhost:8443/help</a> in your browser. Actually this should just render this `README.md.` Incidently any request without a client cert, is redirected to `/help.` Since a self-signed server certificate is used, your browser will issue an "unsafe" warning.
 
+
+#### Test requests
+
 The test script uses `curl` to send client-authenticated HTTPS requests to the service, using the "app" certificate.
 ```
 POST cert/client0 
@@ -63,7 +66,7 @@ where `client0` is the common name of a client certificate we want to enroll, an
 my <a href="https://github.com/evanx/vellum/wiki/ClientAuthentication">Client Authentication</a> Java article.
 
 
-### Redis 
+#### Redis data
 
 The following Redis CLI command shows the data saved in Redis, where each cert has a hashset.
 

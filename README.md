@@ -3,8 +3,6 @@
 
 <b>This is a Node.js microservice to enroll, revoke and verify certs, stored in Redis.</b>
 
-On 15 March 2015, work commenced on this project, but it is currently incomplete.
-
 See this app's entry point: <a href="https://github.com/evanx/cryptoserver/blob/master/lib/app_cryptoserver.js">lib/app_authserver.js</a>.
 
 This side project is developed as an exercise in Node crypto. As such, do not use it in production without thorough testing and review.

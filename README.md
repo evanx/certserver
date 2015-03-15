@@ -61,7 +61,7 @@ GET auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
 ```
 
 where "client0" is the common name of a client certificate we want to enroll, and later verify when the client connects to our app, e.g. via a "dynamic truststore" e.g. see 
-
+<a href="https://github.com/evanx/vellum/wiki/ClientAuthentication">github.com/evanx/vellum/wiki/ClientAuthentication</a>.
 
 ### Redis 
 

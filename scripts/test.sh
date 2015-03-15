@@ -8,10 +8,10 @@ export SERVER_CERT=tmp/certs/server.cert
 export CA_CERT=tmp/certs/ca.cert
 export ENV_TYPE=test
 
-user=client
-certName=testcert
+user=app
+certName=client0
 
-# util methods
+# util functions
 
 c2get() {
   uri=$1
@@ -21,26 +21,25 @@ c2get() {
   echo " (exitCode $?)"
 }
 
-c1get() {
-  c2get $1 client
-}
-
 c3post() {
   uri=$1
-  user=$2
-  data=$3
-  echo "POST $uri as $user with data '$data'"
-  curl -s -k https://localhost:8443/$uri -d "$data" --key tmp/certs/$user.key --cert tmp/certs/$user.cert
+  certName=$2
+  user=$3
+  certFile=tmp/certs/$certName.cert 
+  openssl x509 -text -in $certFile | grep 'Issuer:\|Subject:'
+  echo "POST $uri as $user with cert '$certName'"
+  curl -s -k https://localhost:8443/$uri -d "@$certFile" --key tmp/certs/$user.key --cert tmp/certs/$user.cert
   echo " (exitCode $?)"
 }
 
-c1post() {
-  data="$1"
-  c3post auth/$certName client "$data"
+# default util functions 
+
+c1get() {
+  c2get $1 app
 }
 
-c0post() {
-  c3post auth/$certName client ""
+c2post() {
+  c3post $1 $2 app
 }
 
 # redis 
@@ -66,8 +65,8 @@ c0clear() {
 # client 
 
 c0client() {
-  c1post cert/$certName 
-  c1post auth/$certName  
+  c2post cert/$certName $certName
+  c2post auth/$certName $certName
 }
 
 c0clientTask() {

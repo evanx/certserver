@@ -1,7 +1,7 @@
 
-## certserver - Node server to enroll, revoke and verify certs
+## certserver 
 
-Node server to manage and authenticate client certificates in Redis.
+This is a Node.js microservice to enroll, revoke and verify certs. Certs are stored in Redis.
 
 On 15 March 2015, work commenced on this project, but it is currently incomplete.
 

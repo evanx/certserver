@@ -54,6 +54,8 @@ c0redisShow() {
   echo '$' redis-cli keys 'cert:*'
   redis-cli keys 'cert:*'
   redisKey="cert:$certName"
+  echo; echo '$' redis-cli hkeys $redisKey
+  redis-cli hkeys $redisKey
   echo; echo '$' redis-cli hgetall $redisKey
   redis-cli hgetall $redisKey
   echo; 

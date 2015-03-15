@@ -16,7 +16,7 @@ Run the following bash script to generate test certs using openssl: [scripts/cer
 
 Then run the test script: [scripts/test.sh](https://github.com/evanx/authserver/blob/master/scripts/test.sh)
 
-Requires a local Redis server to be a running. (TODO: configurable Redis URL.)
+The server requires a local Redis server to be a running. (TODO: configurable Redis URL.)
 
 ```shell
 sudo apt-get install redis-server

@@ -1,5 +1,7 @@
 
-# certserver - Node server to enroll, revoke and verify certs 
+# certserver 
+
+## Node server to enroll, revoke and verify certs 
 
 Node server to manage and authenticate client certificates in Redis.
 

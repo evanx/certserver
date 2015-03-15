@@ -29,7 +29,7 @@ sudo service start redis-server
 git clone https://github.com/evanx/certserver.git
 cd certserver
 npm install
-sh scripts/certGen.sj
+sh scripts/certGen.sh
 sh scripts/test.sh
 ```
 

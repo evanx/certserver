@@ -20,6 +20,34 @@ When the app is running, you can view the URL <a href="https://localhost:8443/he
 
 The test script uses `curl` to send client-authenticated HTTPS requests to the server.
 
+```
+POST cert/client0 
+{"message":"public key matches"}
+
+POST auth/client0
+{"error":"invalid public key"} 
+
+GET fingerprint/client0
+98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
+
+GET auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
+{"message":"fingerprint matches"}
+
+GET auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59/qwerty
+{"error":"invalid public key"} 
+
+GET auth/client0/qwerty
+{"error":"invalid fingerprint"}
+
+GET revoke/client0
+{"message":"added to revocation list"}
+
+GET auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
+{"error":"revoked"}
+```
+
+where the `app` is the client of our auth server, which wants to authenticate its SSL clients e.g. `client0.`
+
 
 ### Redis 
 
@@ -27,9 +55,10 @@ The following Redis CLI commands show the data saved in Redis.
 
 ```shell
 $ redis-cli hkeys cert:client0
-1) "publicKey"
-2) "cert"
-3) "pem"
+1) "fingerPrint"
+2) "publicKey"
+3) "cert"
+4) "pem"
 ```
 
 

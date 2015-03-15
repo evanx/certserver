@@ -9,16 +9,26 @@ export CA_CERT=tmp/certs/ca.cert
 export ENV_TYPE=test
 
 user=app
-certName=client0
+certName0=client0
 
 # util functions
+
+c2getq() {
+  uri=$1
+  user=$2
+  curl -s -k https://localhost:8443/$uri --key tmp/certs/$user.key --cert tmp/certs/$user.cert 
+}
 
 c2get() {
   uri=$1
   user=$2
-  echo "GET $uri as $user"
+  echo; echo "GET $uri" 
   curl -s -k https://localhost:8443/$uri --key tmp/certs/$user.key --cert tmp/certs/$user.cert 
-  echo " (exitCode $?)"
+  echo 
+  if [ $? -ne 0 ] 
+  then
+    echo "  (exitCode $?)" 
+  fi
 }
 
 c3post() {
@@ -27,9 +37,13 @@ c3post() {
   user=$3
   certFile=tmp/certs/$certName.cert 
   openssl x509 -text -in $certFile | grep 'Issuer:\|Subject:'
-  echo "POST $uri as $user with cert '$certName'"
+  echo; echo "POST $uri"
   cat $certFile | curl -s -k https://localhost:8443/$uri --data-binary @- --key tmp/certs/$user.key --cert tmp/certs/$user.cert
-  echo " (exitCode $?)"
+  echo 
+  if [ $? -ne 0 ] 
+  then
+    echo "  (exitCode $?)" 
+  fi
 }
 
 # default util functions 
@@ -46,30 +60,45 @@ c2post() {
 
 c1hget() {
   hkey=$1
-  echo; echo '$' redis-cli redis hget cert:$certName $hkey 
-  redis-cli hget cert:$certName $hkey
+  echo; echo '$' redis-cli redis hget cert:$certName0 $hkey 
+  redis-cli hget cert:$certName0 $hkey
 }
 
 c0redisShow() {
   echo '$' redis-cli keys 'cert:*'
   redis-cli keys 'cert:*'
-  redisKey="cert:$certName"
+  redisKey="cert:$certName0"
   echo; echo '$' redis-cli hkeys $redisKey
   redis-cli hkeys $redisKey
   echo; echo '$' redis-cli hgetall $redisKey
   redis-cli hgetall $redisKey
+  echo; echo '$' redis-cli smembers cert:set
+  redis-cli smembers cert:set
   echo; 
 }
 
 c0clear() {
-  redis-cli del "cert:$certName"
+  redis-cli del "cert:client0"
+  redis-cli del "cert:client1"
 }
 
 # client 
 
 c0client() {
-  c2post cert/$certName $certName
-  c2post auth/$certName $certName
+  c2post cert/client0 client0
+  c2post cert/client1 client1
+  c2post auth/client0 client0
+  c2post auth/client0 client1
+  c2post auth/client1 client1
+  c2post auth/client2 client1
+  c1get fingerprint/client0
+  fingerprint=`c2getq fingerprint/client0 app`
+  echo "fingerprint $fingerprint"
+  c1get auth/client0/$fingerprint
+  c1get auth/client0/$fingerprint/aaaa
+  c1get auth/client0/aaaa
+  c2get revoke/client0 client0
+  c1get auth/client0/$fingerprint
 }
 
 c0clientTask() {

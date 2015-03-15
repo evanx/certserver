@@ -49,6 +49,7 @@ c0gen() {
   c1genrsa server
   c1genrsa app
   c1genrsa client0
+  c1genrsa client1
   c1removeprot server
   #c0rsync
 }

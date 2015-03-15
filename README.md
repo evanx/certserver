@@ -37,10 +37,10 @@ When the app is running, you can view the URL <a href="https://localhost:8443/he
 
 The test script uses `curl` to send client-authenticated HTTPS requests to the service, using the "app" certificate.
 ```
-POST /cert/client0 data:client0.cert
+POST /cert/client0 - data: client0.cert
 {"message":"public key matches"}
 
-POST /auth/client0 data:client1.cert
+POST /auth/client0 - data: client1.cert
 {"error":"invalid public key"} 
 
 GET /fingerprint/client0

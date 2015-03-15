@@ -28,7 +28,7 @@ c3post() {
   certFile=tmp/certs/$certName.cert 
   openssl x509 -text -in $certFile | grep 'Issuer:\|Subject:'
   echo "POST $uri as $user with cert '$certName'"
-  curl -s -k https://localhost:8443/$uri -d "@$certFile" --key tmp/certs/$user.key --cert tmp/certs/$user.cert
+  cat $certFile | curl -s -k https://localhost:8443/$uri --data-binary @- --key tmp/certs/$user.key --cert tmp/certs/$user.cert
   echo " (exitCode $?)"
 }
 
@@ -53,8 +53,9 @@ c1hget() {
 c0redisShow() {
   echo '$' redis-cli keys 'cert:*'
   redis-cli keys 'cert:*'
-  echo; echo '$' redis-cli hkeys "cert:$certName"
-  redis-cli hkeys "cert:$certName"
+  redisKey="cert:$certName"
+  echo; echo '$' redis-cli hgetall $redisKey
+  redis-cli hgetall $redisKey
   echo; 
 }
 
@@ -76,8 +77,7 @@ c0clientTask() {
   sleep 1
   echo; echo "## client output"
   cat $out 
-  sleep 2
-  #c0redisShow
+  c0redisShow
 }
 
 # lifecycle 

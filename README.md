@@ -82,6 +82,7 @@ $ redis-cli smembers cert:revoked
 1) "client0"
 ```
 
+
 ## Other resources
 
 See the companion project: https://github.com/evanx/cryptoserver

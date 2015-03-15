@@ -37,28 +37,28 @@ When the app is running, you can view the URL <a href="https://localhost:8443/he
 
 The test script uses `curl` to send client-authenticated HTTPS requests to the service, using the "app" certificate.
 ```
-POST cert/client0 
+POST /cert/client0 data:client0.cert
 {"message":"public key matches"}
 
-POST auth/client0
+POST /auth/client0 data:client1.cert
 {"error":"invalid public key"} 
 
-GET fingerprint/client0
+GET /fingerprint/client0
 98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
 
-GET auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
+GET /auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
 {"message":"fingerprint matches"}
 
-GET auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59/qwerty
+GET /auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59/qwerty
 {"error":"invalid public key"} 
 
-GET auth/client0/qwerty
+GET /auth/client0/qwerty
 {"error":"invalid fingerprint"}
 
-GET revoke/client0
+GET /revoke/client0
 {"message":"added to revocation list"}
 
-GET auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
+GET /auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
 {"error":"revoked"}
 ```
 

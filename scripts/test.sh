@@ -37,7 +37,7 @@ c3post() {
   user=$3
   certFile=tmp/certs/$certName.cert 
   openssl x509 -text -in $certFile | grep 'Issuer:\|Subject:'
-  echo; echo "POST $uri"
+  echo; echo "POST uri:/$uri data:$certFile"
   cat $certFile | curl -s -k https://localhost:8443/$uri --data-binary @- --key tmp/certs/$user.key --cert tmp/certs/$user.cert
   echo 
   if [ $? -ne 0 ] 

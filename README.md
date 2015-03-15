@@ -10,11 +10,13 @@ This side project is developed as an exercise in Node crypto. As such, do not us
 
 ### Bash test script
 
-After `git clone` and `npm install,` run the following bash script to generate test certs using openssl: [scripts/certGen.sh](https://github.com/evanx/authserver/blob/master/scripts/certGen.sh)
+Requires Redis server to be a running e.g. `apt-get install redis-server` and `service start redis-server`
+
+Run `git clone` and `npm install` 
+
+Run the following bash script to generate test certs using openssl: [scripts/certGen.sh](https://github.com/evanx/authserver/blob/master/scripts/certGen.sh)
 
 Then run the test script: [scripts/test.sh](https://github.com/evanx/authserver/blob/master/scripts/test.sh)
-
-(Requires Redis server to be a running e.g. `apt-get install redis-server` and `service start redis-server.`)
 
 When the app is running, you can view the URL <a href="https://localhost:8443/help">https://localhost:8443/help</a> in your browser. Actually this should just render this `README.md.` Incidently any request without a client cert, is redirected to `/help.` Since a self-signed server certificate is used, your browser will issue an "unsafe" warning.
 

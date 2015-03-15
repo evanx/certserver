@@ -9,7 +9,7 @@ See this app's entry point: <a href="https://github.com/evanx/cryptoserver/blob/
 This side project is developed as an exercise in Node crypto. As such, do not use it in production without thorough testing and review.
 
 
-### testing 
+### Bash test script
 
 First generate test certs using openssl: [scripts/certGen.sh](https://github.com/evanx/authserver/blob/master/scripts/certGen.sh)
 

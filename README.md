@@ -10,7 +10,7 @@ This side project is developed as an exercise in Node crypto. As such, do not us
 
 ### Bash test script
 
-First generate test certs using openssl: [scripts/certGen.sh](https://github.com/evanx/authserver/blob/master/scripts/certGen.sh)
+After `git clone` and `npm install,` run the following bash script to generate test certs using openssl: [scripts/certGen.sh](https://github.com/evanx/authserver/blob/master/scripts/certGen.sh)
 
 Then run the test script: [scripts/test.sh](https://github.com/evanx/authserver/blob/master/scripts/test.sh)
 

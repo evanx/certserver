@@ -16,7 +16,7 @@ Then run the test script: [scripts/test.sh](https://github.com/evanx/authserver/
 
 When the app is running, you can view the URL <a href="https://localhost:8443/help">https://localhost:8443/help</a> in your browser. Actually this should just render this `README.md.` Incidently any request without a client cert, is redirected to `/help.` Since a self-signed server certificate is used, your browser will issue an "unsafe" warning.
 
-The test script uses `curl` to send client-authenticated HTTPS requests to the server.
+The test script uses `curl` to send client-authenticated HTTPS requests to the service.
 
 ```
 POST cert/client0 
@@ -44,7 +44,7 @@ GET auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
 {"error":"revoked"}
 ```
 
-where the `app` is the client of our auth server, which wants to authenticate its SSL clients e.g. `client0.`
+where the `app` is the client of the server, which wants to authenticate its SSL clients e.g. `client0.`
 
 
 ### Redis 

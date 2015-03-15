@@ -32,7 +32,7 @@ sh scripts/test.sh
 
 When the app is running, you can view the URL <a href="https://localhost:8443/help">https://localhost:8443/help</a> in your browser. Actually this should just render this `README.md.` Incidently any request without a client cert, is redirected to `/help.` Since a self-signed server certificate is used, your browser will issue an "unsafe" warning.
 
-The test script uses `curl` to send client-authenticated HTTPS requests to the service.
+The test script uses `curl` to send client-authenticated HTTPS requests to the service, using the "app" certificate.
 
 ```
 POST cert/client0 
@@ -60,7 +60,7 @@ GET auth/client0/98:BB:5C:7F:ED:A7:36:83:C4:6B:D7:8F:DD:74:B4:52:A0:0E:8A:59
 {"error":"revoked"}
 ```
 
-where the `app` is the client of the server, which wants to authenticate its SSL clients e.g. `client0.`
+where "client0" is the common name of a client certificate we want to enroll, and later verify when the client connects to our app, e.g. via a "dynamic truststore" e.g. see 
 
 
 ### Redis 
@@ -69,7 +69,7 @@ The following Redis CLI commands show the data saved in Redis.
 
 ```shell
 $ redis-cli hkeys cert:client0
-1) "fingerPrint"
+1) "fingerprint"
 2) "publicKey"
 3) "cert"
 4) "pem"

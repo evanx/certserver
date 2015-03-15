@@ -26,9 +26,11 @@ Then run the test script: [scripts/test.sh](https://github.com/evanx/authserver/
 ```shell
 sudo apt-get install redis-server
 sudo service start redis-server
+
 git clone https://github.com/evanx/certserver.git
 cd certserver
 npm install
+
 sh scripts/certGen.sh
 sh scripts/test.sh
 ```

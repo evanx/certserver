@@ -72,8 +72,8 @@ c0redisShow() {
   redis-cli hkeys $redisKey
   echo; echo '$' redis-cli hgetall $redisKey
   redis-cli hgetall $redisKey
-  echo; echo '$' redis-cli smembers cert:set
-  redis-cli smembers cert:set
+  echo; echo '$' redis-cli smembers cert:revoked
+  redis-cli smembers cert:revoked
   echo; 
 }
 

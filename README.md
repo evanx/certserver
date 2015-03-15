@@ -66,7 +66,7 @@ my <a href="https://github.com/evanx/vellum/wiki/ClientAuthentication">ClientAut
 
 ### Redis 
 
-The following Redis CLI commands show the data saved in Redis. 
+The following Redis CLI command shows the data saved in Redis, where each cert has a hashset.
 
 ```shell
 $ redis-cli hkeys cert:client0
@@ -76,6 +76,12 @@ $ redis-cli hkeys cert:client0
 4) "pem"
 ```
 
+The following Redis CLI command shows our revocation list.
+
+```shell
+$ redis-cli smembers cert:revoked
+1) "client0"
+```
 
 ## Other resources
 

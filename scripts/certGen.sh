@@ -5,7 +5,7 @@ mkdir -p tmp/certs
 
 cd tmp/certs 
 
-rm -f ca.* server.* evan.* brent.* henry.*
+rm -f ca.* server.* 
 
 pass="pass:test"
 
@@ -47,9 +47,7 @@ c0rsync() {
 c0gen() {
   c1genrsa ca
   c1genrsa server
-  c1genrsa evan
-  c1genrsa brent
-  c1genrsa henry
+  c1genrsa client
   c1removeprot server
   #c0rsync
 }

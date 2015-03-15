@@ -6,8 +6,10 @@ export APP_PORT=8443
 export SERVER_KEY=tmp/certs/server.key
 export SERVER_CERT=tmp/certs/server.cert
 export CA_CERT=tmp/certs/ca.cert
-export ENV_TYPE=testing
-export SECRET_TIMEOUT_SECS=180
+export ENV_TYPE=test
+
+user=client
+certName=testcert
 
 # util methods
 
@@ -20,7 +22,7 @@ c2get() {
 }
 
 c1get() {
-  c2get $1 evan
+  c2get $1 client
 }
 
 c3post() {
@@ -32,62 +34,40 @@ c3post() {
   echo " (exitCode $?)"
 }
 
-c1info() {
-  keyName=$1
-  c1get key/$keyName 
+c1post() {
+  data="$1"
+  c3post auth/$certName client "$data"
 }
 
-# keyName context
-
-keyName=testdek
-
-c0postsecret2() {
-  c3post secret/$keyName evan "eeeeee"
-  c3post secret/$keyName henry "hhhhhh"
+c0post() {
+  c3post auth/$certName client ""
 }
 
-c0postsecret3() {
-  c3post secret/$keyName evan "eeeeee"
-  c3post secret/$keyName henry "hhhhhh"
-  c3post secret/$keyName brent "bbbbbb"
-}
-
-c0genkey() {
-  c2get genkey/$keyName/3 evan
-}
+# redis 
 
 c1hget() {
   hkey=$1
-  echo; echo '$' redis-cli redis hget dek:$keyName $hkey 
-  redis-cli hget dek:$keyName $hkey
+  echo; echo '$' redis-cli redis hget cert:$certName $hkey 
+  redis-cli hget cert:$certName $hkey
 }
 
 c0redisShow() {
-  echo '$' redis-cli keys 'dek:*'
-  redis-cli keys 'dek:*'
-  echo; echo '$' redis-cli hkeys "dek:$keyName"
-  redis-cli hkeys "dek:$keyName"
+  echo '$' redis-cli keys 'cert:*'
+  redis-cli keys 'cert:*'
+  echo; echo '$' redis-cli hkeys "cert:$certName"
+  redis-cli hkeys "cert:$certName"
   echo; 
-  c1hget iterationCount
-  c1hget algorithm
-  c1hget dek:brent:evan
-  c1hget dek:brent:henry
-  c1hget dek:evan:henry
 }
 
 c0clear() {
-  redis-cli del "dek:$keyName"
+  redis-cli del "cert:$certName"
 }
 
+# client 
+
 c0client() {
-  c0genkey
-  #c0postsecret2
-  #return
-  c0postsecret3
-  sleep 1 
-  c1get key/$keyName  
-  c1get load/$keyName 
-  c0postsecret2
+  c1post cert/$certName 
+  c1post auth/$certName  
 }
 
 c0clientTask() {
@@ -98,8 +78,10 @@ c0clientTask() {
   echo; echo "## client output"
   cat $out 
   sleep 2
-  c0redisShow
+  #c0redisShow
 }
+
+# lifecycle 
 
 c0kill() {
   fuser -k 8443/tcp
@@ -109,7 +91,7 @@ c0default() {
   c0kill
   c0clear
   c0clientTask & 
-    nodejs lib/app_cryptoserver.js | bunyan -o short
+    nodejs lib/app_authserver.js | bunyan -o short
 }
 
 if [ $# -gt 0 ]

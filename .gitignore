@@ -4,3 +4,4 @@
 /tmp
 *.log
 /certs
+/authserver/nbproject/private/

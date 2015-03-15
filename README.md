@@ -2,7 +2,7 @@
 
 Node server to manage and authenticate client certificates in Redis.
 
-As of 15 March 2015, I have just copied and edited some files from <a href="https://github.com/evanx/cryptoserver">cryptoserver</a> but work has not commenced on this project in earnest. Hopefully I'll have a spare weekend in April in which to implement this somewhat simple server.
+On 15 March 2015, work commenced on this project, but it is currently incomplete.
 
 See this app's entry point: <a href="https://github.com/evanx/cryptoserver/blob/master/lib/app_cryptoserver.js">lib/app_authserver.js</a>.
 

@@ -3,7 +3,7 @@
 
 <b>This is a Node.js microservice to enroll, revoke and verify certs, stored in Redis.</b>
 
-See this app's entry point: <a href="https://github.com/evanx/cryptoserver/blob/master/lib/app_cryptoserver.js">lib/app_authserver.js</a>.
+See this app's entry point: <a href="https://github.com/evanx/certserver/blob/master/lib/app_certserver.js">lib/app_certserver.js</a>.
 
 This side project is developed as an exercise in Node crypto. As such, do not use it in production without thorough testing and review.
 
@@ -12,9 +12,9 @@ This side project is developed as an exercise in Node crypto. As such, do not us
 
 As per usual, `git clone` and `npm install` 
 
-Run the following bash script to generate test certs using openssl: [scripts/certGen.sh](https://github.com/evanx/authserver/blob/master/scripts/certGen.sh)
+Run the following bash script to generate test certs using openssl: [scripts/certGen.sh](https://github.com/evanx/certserver/blob/master/scripts/certGen.sh)
 
-Then run the test script: [scripts/test.sh](https://github.com/evanx/authserver/blob/master/scripts/test.sh)
+Then run the test script: [scripts/test.sh](https://github.com/evanx/certserver/blob/master/scripts/test.sh)
 
 The test script assumes that a local Redis server is running on its default port (6379).
 

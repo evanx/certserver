@@ -16,7 +16,7 @@ Run the following bash script to generate test certs using openssl: [scripts/cer
 
 Then run the test script: [scripts/test.sh](https://github.com/evanx/authserver/blob/master/scripts/test.sh)
 
-This microservice requires a local Redis server to be a running. (TODO: enable a configurable Redis URL.)
+The test script assumes that a local Redis server is running on its default port (6379).
 
 ```shell
 sudo apt-get install redis-server
@@ -32,6 +32,18 @@ sh scripts/test.sh
 
 When the app is running, you can view the URL <a href="https://localhost:8443/help">https://localhost:8443/help</a> in your browser. Actually this should just render this `README.md.` Incidently any request without a client cert, is redirected to `/help.` Since a self-signed server certificate is used, your browser will issue an "unsafe" warning.
 
+```
+~/certserver$ sh scripts/test.sh 
+
+CA_CERT tmp/certs/ca.cert
+SERVER_CERT tmp/certs/server.cert
+SERVER_KEY tmp/certs/server.key
+ENV_TYPE test
+APP_PORT 8443
+REDIS_HOST 127.0.0.1
+REDIS_PORT 6379
+...
+```
 
 #### Test requests
 

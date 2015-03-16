@@ -7,6 +7,8 @@ export SERVER_KEY=tmp/certs/server.key
 export SERVER_CERT=tmp/certs/server.cert
 export CA_CERT=tmp/certs/ca.cert
 export ENV_TYPE=test
+export REDIS_HOST=127.0.0.1
+export REDIS_PORT=6379
 
 user=app
 certName0=client0

@@ -7,6 +7,8 @@ See this app's entry point: <a href="https://github.com/evanx/certserver/blob/ma
 
 This side project is developed as an exercise in Node crypto. As such, do not use it in production without thorough testing and review.
 
+See: http://redis.io/topics/security
+
 
 ### Bash test script
 

@@ -105,7 +105,7 @@ $ redis-cli smembers cert:revoked
 
 ## Other resources
 
-See the companion project: https://github.com/evanx/cryptoserver
+Another crypto project: https://github.com/evanx/cryptoserver
 
 Wiki home: https://github.com/evanx/vellum/wiki
 

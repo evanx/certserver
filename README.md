@@ -1,5 +1,5 @@
 
-## certserver 
+## Certserver - a microservice to manage SSL certificates
 
 <b>This is a Node.js microservice to enroll, revoke and verify certs, stored in Redis.</b>
 

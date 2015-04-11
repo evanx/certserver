@@ -123,7 +123,7 @@ c0default() {
   c0kill
   c0clear
   c0clientTask & 
-    nodejs lib/app_authserver.js | bunyan -o short
+    nodejs lib/app_certserver.js | bunyan -o short
 }
 
 if [ $# -gt 0 ]
